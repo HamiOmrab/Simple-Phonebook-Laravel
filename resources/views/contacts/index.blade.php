@@ -11,14 +11,16 @@
   <table>
     <thead>
       <tr>
+        <th scope="col">N#</th>
         <th scope="col">First Name</th>
         <th scope="col">Last Name</th>
         <th scope="col">Number</th>
       </tr>
     </thead>
     <tbody>
-      @foreach($contacts as $contact)
+      @foreach($contacts as $index => $contact)
         <tr>
+          <td>{{ (++$index) }}</td>
           <td>{{ $contact->firstname }}</td>
           <td>{{ $contact->lastname }}</td>
           <td>{{ $contact->phonenumber }}</td>
