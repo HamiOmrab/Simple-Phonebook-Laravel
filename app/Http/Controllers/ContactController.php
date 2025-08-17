@@ -28,7 +28,7 @@ class ContactController extends Controller
         ]);
         
         Contact::create($request->all());
-            return redirect()->route('contacts.index')->with('success', 'Contact created successfully.');
+        return redirect()->route('contacts.index')->with('success', 'Contact created successfully.');
     }
 
     /**
@@ -41,6 +41,7 @@ class ContactController extends Controller
 
     public function edit(string $id)
     {
+        $contact = Contact::findOrFail($id);
         return view('contacts.edit', compact('contact'));    
     }
 
@@ -52,7 +53,8 @@ class ContactController extends Controller
             'phonenumber' => 'required',
         ]);
         
-        Contact::update($request->all());
+        $contact = Contact::findOrFail($id);
+        $contact->update($request->all());
         return redirect()->route('contacts.index')->with('success', 'Contact created successfully.');
     }
 
