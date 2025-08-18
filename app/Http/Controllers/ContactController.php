@@ -67,6 +67,20 @@ class ContactController extends Controller
     public function apiIndex()
     {
         return response()->json(\App\Models\Contact::all());
-    }   
+    }
+    
+    public function apiStore(Request $request)
+    {
+        $request->validate([
+            'firstname'   => 'required|min:2',
+            'lastname'    => 'required|min:2',
+            'phonenumber' => 'required',
+        ]);
+
+        $contact = Contact::create($request->json()->all());
+
+        return response()->json($contact);
+    }
+
 
 }
