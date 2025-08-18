@@ -64,4 +64,9 @@ class ContactController extends Controller
         return redirect()->route('contacts.index')->with('success', 'Contact deleted successfully.');
     }
 
+    public function apiIndex()
+    {
+        return response()->json(\App\Models\Contact::all());
+    }   
+
 }
