@@ -31,13 +31,12 @@ class ContactController extends Controller
         return redirect()->route('contacts.index')->with('success', 'Contact created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
-        //
+        $contact = Contact::findOrFail($id);
+        return response()->json($contact);
     }
+    
 
     public function edit(string $id)
     {

@@ -42,6 +42,7 @@ function CreateContact({ onCreated }) {
             setPhonenumber("");
 
             if (onCreated) onCreated();
+            navigate("/contacts");
 
         } catch (err) {
             console.error("Error:", err);
@@ -82,9 +83,10 @@ function CreateContact({ onCreated }) {
 
                 <button type="submit">Save</button>
             </form>
-            <button type="button" onClick={() => navigate("/contacts")}>
-                Back to Contacts List
-            </button>
+            <a href="/contacts">Back to Contacts List</a>
+            {/* <button type="button" onClick={() => navigate("/contacts")}>
+              Back to Contacts List
+            </button> */}
         </div>
     );
 }
