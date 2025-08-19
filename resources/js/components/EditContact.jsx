@@ -13,7 +13,6 @@ function EditContact({ onUpdated }) {
         fetch(`/api/contacts/${id}`)
             .then(res => res.json())
             .then(data => {
-                console.log("DATA:", data);
                 setFirstname(data.firstname || "");
                 setLastname(data.lastname || "");
                 setPhonenumber(data.phonenumber || "");
@@ -43,28 +42,44 @@ function EditContact({ onUpdated }) {
 
     return (
         <div>
-            <h2>Edit Contact</h2>
+            <h1>Edit Contact</h1>
+
             <form onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    placeholder="First Name"
-                    value={firstname}
-                    onChange={(e) => setFirstname(e.target.value)}
-                />
-                <input
-                    type="text"
-                    placeholder="Last Name"
-                    value={lastname}
-                    onChange={(e) => setLastname(e.target.value)}
-                />
-                <input
-                    type="text"
-                    placeholder="Phone Number"
-                    value={phonenumber}
-                    onChange={(e) => setPhonenumber(e.target.value)}
-                />
+                <div>
+                    <label>First Name:</label><br />
+                    <input
+                        type="text"
+                        name="firstname"
+                        value={firstname}
+                        onChange={(e) => setFirstname(e.target.value)}
+                    /><br /><br />
+                </div>
+
+                <div>
+                    <label>Last Name:</label><br />
+                    <input
+                        type="text"
+                        name="lastname"
+                        value={lastname}
+                        onChange={(e) => setLastname(e.target.value)}
+                    /><br /><br />
+                </div>
+
+                <div>
+                    <label>Phone Number:</label><br />
+                    <input
+                        type="text"
+                        name="phonenumber"
+                        value={phonenumber}
+                        onChange={(e) => setPhonenumber(e.target.value)}
+                    /><br /><br />
+                </div>
+
                 <button type="submit">Update</button>
             </form>
+
+            <br />
+            <a href="/contacts">Cancel editing and back to list</a>
         </div>
     );
 }

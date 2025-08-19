@@ -3,15 +3,14 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
 
-Route::resource('contacts', ContactController::class);
+// Blade pages
 Route::get('/', [ContactController::class, 'index']);
+Route::resource('contacts', ContactController::class)->except(['destroy']); // destroy را جداگانه تعریف می‌کنیم
 
-Route::get('/api/contacts',  [ContactController::class, 'apiIndex']);
+// API React
+Route::get('/api/contacts', [ContactController::class, 'apiIndex']);
 Route::post('/api/contacts', [ContactController::class, 'apiStore']);
-Route::apiResource('contacts', ContactController::class);
+Route::get('/api/contacts/{contact}', [ContactController::class, 'show']);
+Route::put('/api/contacts/{contact}', [ContactController::class, 'update']);
+Route::delete('/api/contacts/{contact}', [ContactController::class, 'destroy']);
 
-
-
-Route::get('/api/contacts/{id}', [ContactController::class, 'show']);
-Route::put('/api/contacts/{id}', [ContactController::class, 'update']);
-Route::delete('/api/contacts/{id}', [ContactController::class, 'destroy']);

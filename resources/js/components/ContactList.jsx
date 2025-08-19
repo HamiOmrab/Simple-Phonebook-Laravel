@@ -15,20 +15,37 @@ function ContactList() {
             });
     }, []);
 
-    const handleDelete = async (id) => {
-        if (!confirm("Are you sure you want to delete this contact?")) return;
+const handleDelete = async (contact) => {
+    if (!confirm(`Are you sure you want to delete ${contact.firstname}?`)) return;
+
+    try {
+        console.log("Deleting contact:", contact.id);
 
         const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-        const response = await fetch(`/api/contacts/${id}`, {
+        const response = await fetch(`/api/contacts/${contact.id}`, {
             method: "DELETE",
-            headers: { "X-CSRF-TOKEN": token }
+            headers: { 
+                "Accept": "application/json",
+                "X-CSRF-TOKEN": token
+            }
         });
 
-        if (response.ok) {
-            setContacts((prev) => prev.filter(c => c.id !== id));
+        if (!response.ok) {
+            const errText = await response.text();
+            console.error("Delete failed:", errText);
+            alert("Failed to delete contact");
+            return;
         }
-    };
+
+        setContacts(prev => prev.filter(c => c.id !== contact.id));
+        // alert(`${contact.firstname} deleted successfully`);
+    } catch (error) {
+        console.error("Network error:", error);
+        alert("Error while deleting");
+    }
+};
+
 
     if (loading) {
         return <p>Loading contacts...</p>;
@@ -62,11 +79,11 @@ function ContactList() {
                                 Edit
                             </Link>
 
-                            {/* Delete */}
+                            
                             <button 
-                                onClick={() => handleDelete(contact.id)} 
+                                onClick={() => handleDelete(contact)} 
                                 className="ml-2"
-                            >
+                            > 
                                 Delete
                             </button>
                         </td>

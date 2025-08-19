@@ -83,10 +83,7 @@ function CreateContact({ onCreated }) {
 
                 <button type="submit">Save</button>
             </form>
-            <a href="/contacts">Back to Contacts List</a>
-            {/* <button type="button" onClick={() => navigate("/contacts")}>
-              Back to Contacts List
-            </button> */}
+            <a href="/contacts">Cancel adding and back to Contacts List</a>
         </div>
     );
 }

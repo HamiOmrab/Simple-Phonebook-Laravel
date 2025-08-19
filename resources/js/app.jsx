@@ -14,7 +14,8 @@ function App() {
       </nav>
 
       <Routes>
-        <Route path="/contacts" element={<ContactList />} />
+        
+        <Route path="contacts" element={<ContactList />} />
         <Route path="/contacts/create" element={<CreateContact />} />
         <Route path="/contacts/:id/edit" element={<EditContact />} />
         <Route path="*" element={<Navigate to="/contacts" replace />} />
